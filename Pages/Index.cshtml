@@ -1,0 +1,212 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="accordion" id="mainAccordian">
+    <div class="card">
+        <div class="card-header" id="captureHeader">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#captureBody">
+                    Capture Image
+                </button>
+            </h2>
+        </div>
+
+        <div id="captureBody" class="collapse show" data-parent="#mainAccordian">
+            <div class="card-body">
+                <div class="cam-container">
+                    <video id="camVideo" class="cam-video">Video stream not started.</video>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="camChooser">Camera</label>
+                    </div>
+                    <select class="custom-select cam-chooser" id="camChooser">
+                    </select>
+                    <div class="input-group-append">
+                        <button type="button" id="camStart" class="btn btn-secondary cam-start" disabled>Start</button>
+                        <button type="button" id="camCapture" class="btn btn-primary cam-capture" disabled>Capture</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="cropHeader">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#cropBody">
+                    Crop Image
+                </button>
+            </h2>
+        </div>
+
+        <div id="cropBody" class="collapse" aria-labelledby="headingTwo" data-parent="#mainAccordian">
+            <div class="card-body text-center">
+                <div class="pic-container">
+                    <canvas id="picCanvas" class="pic-canvas"></canvas>
+                    <img id="picPhoto" class="pic-photo" />
+                </div>
+                <button type="button" id="picSubmit" class="btn btn-primary pic-submit" disabled>Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="matrixHeader">
+            <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#matrixBody">
+                    Matrix Solver
+                </button>
+            </h2>
+        </div>
+
+        <div id="matrixBody" class="collapse" aria-labelledby="headingTwo" data-parent="#mainAccordian">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div id="matrix-container" class="col-sm">
+                            <table id="matrixTable" class="matrix-table">
+                                <caption>Matrix</caption>
+                                <thead>
+                                    <tr>
+                                        <th class="matrix-header">&nbsp;</th>
+                                        <th class="matrix-header">A</th>
+                                        <th class="matrix-header">B</th>
+                                        <th class="matrix-header">C</th>
+                                        <th class="matrix-header">D</th>
+                                        <th class="matrix-header">E</th>
+                                        <th class="matrix-header">F</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="matrix-header">1</th>
+                                        <td><input type="text" id="matrix1a" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix1b" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix1c" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix1d" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix1e" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix1f" class="matrix-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="matrix-header">2</th>
+                                        <td><input type="text" id="matrix2a" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix2b" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix2c" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix2d" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix2e" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix2f" class="matrix-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="matrix-header">3</th>
+                                        <td><input type="text" id="matrix3a" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix3b" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix3c" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix3d" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix3e" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix3f" class="matrix-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="matrix-header">4</th>
+                                        <td><input type="text" id="matrix4a" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix4b" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix4c" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix4d" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix4e" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix4f" class="matrix-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="matrix-header">5</th>
+                                        <td><input type="text" id="matrix5a" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix5b" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix5c" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix5d" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix5e" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix5f" class="matrix-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="matrix-header">6</th>
+                                        <td><input type="text" id="matrix6a" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix6b" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix6c" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix6d" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix6e" class="matrix-cell" /></td>
+                                        <td><input type="text" id="matrix6f" class="matrix-cell" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="sequence-container" class="col-sm text-center">
+                            <table id="sequenceTable" class="sequence-table">
+                                <caption>Sequences</caption>
+                                <thead>
+                                    <tr>
+                                        <th class="sequence-header">&nbsp;</th>
+                                        <th class="sequence-header">A</th>
+                                        <th class="sequence-header">B</th>
+                                        <th class="sequence-header">C</th>
+                                        <th class="sequence-header">D</th>
+                                        <th class="sequence-header">V</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="sequence-header">1</th>
+                                        <td><input type="text" id="sequence1a" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence1b" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence1c" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence1d" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence1v" class="sequence-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="sequence-header">2</th>
+                                        <td><input type="text" id="sequence2a" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence2b" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence2c" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence2d" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence2v" class="sequence-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="sequence-header">3</th>
+                                        <td><input type="text" id="sequence3a" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence3b" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence3c" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence3d" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence3v" class="sequence-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="sequence-header">4</th>
+                                        <td><input type="text" id="sequence4a" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence4b" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence4c" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence4d" class="sequence-cell" /></td>
+                                        <td><input type="text" id="sequence4v" class="sequence-cell" /></td>
+                                    </tr>
+                                    <tr>
+                                        <th class="sequence-header">Mem</th>
+                                        <td colspan="5"><input type="text" id="sequenceMemory" class="sequence-memory" value="4" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button id="matrixSubmit" class="btn btn-primary">Solve</button>
+                            <button id="matrixClear" class="btn btn-primary">Clear</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm text-center">
+                            <div class="solution-box" id="solution"></div>
+                            <!--
+                            <div class="form-group">
+                                <textarea id="solution" class="form-control solution-box" rows="5" readonly></textarea>
+                            </div>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
